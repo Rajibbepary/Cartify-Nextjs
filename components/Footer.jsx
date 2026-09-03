@@ -9,10 +9,7 @@ const Footer = () => {
         <div className="w-4/5">
           <Image className="w-28 md:w-32" src={assets.logo} alt="logo" />
           <p className="mt-6 text-sm">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
+            Cartify is your trusted online shopping destination for quality products at great prices. Discover the latest products, enjoy secure shopping, and get everything you need delivered right to your doorstep.
           </p>
         </div>
 
