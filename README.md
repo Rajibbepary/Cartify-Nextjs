@@ -20,10 +20,7 @@ This repo is **frontend only** – contributors can improve the design, add new 
 
 1. Clone the repo
 
-    ```bash
-    git clone https://github.com/GreatStackDev/QuickCart.git
-    cd QuickCart
-    ```
+
 
 2. Install dependencies
 
