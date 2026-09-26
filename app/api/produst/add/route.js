@@ -3,7 +3,8 @@
 import connectDB from "@/config/db";
 import authSeller from "@/lib/authSeller";
 import Product from "@/models/Product";
-import { getAuth } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs";
+//import { getAuth } from "@clerk/nextjs/server";
 import { v2 as cloudinary } from "cloudinary";
 import { NextResponse } from "next/server";
 
@@ -18,7 +19,9 @@ cloudinary.config({
 export async function POST(request){
     try{
 
-        const {userId} = getAuth(request)
+        // const {userId} = getAuth(request)
+         
+            const { userId } = await auth();
 
         const isSeller = await authSeller(userId)
 
@@ -37,7 +40,7 @@ export async function POST(request){
         const files = formData.getAll('image');
 
         if(!files || files.length === 0){
-            return NextRequest.json({success: false, message: 'no files uploaded'})
+            return NextResponse.json({success: false, message: 'no files uploaded'})
         }
 
         const result = await Promise.all(
@@ -80,7 +83,9 @@ export async function POST(request){
       return NextResponse.json({success: true, message: 'Upload successful', newProduct})
 
     } catch(error){
-         NextResponse.json({
+        console.error("ADD PRODUCT ERROR:", error);
+
+      return NextResponse.json({
         success: false,
         message: error.message
     })
