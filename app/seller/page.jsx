@@ -28,14 +28,22 @@ const AddProduct = () => {
     formData.append('price', price)
     formData.append('offerPrice', offerPrice)
 
-    for(let i = 0; i < files.length; i++){
-      formData.append('image', files[i])
+    // for(let i = 0; i < files.length; i++){
+    //   formData.append('image', files[i])
+    // }
+
+    files.forEach((file) => {
+    if (file) {
+        formData.append("image", file);
     }
+    });
+
 
     try{
       const token = await getToken()
   
-      const { data} = await axios.post('/api/product/add', formData,{headers:{Authorization:`Bearer ${token}`}})
+      const { data} = await axios.post('/api/product/add',formData,{headers:{Authorization:`Bearer ${token}`}})
+      //console.log("🔥 API RESPONSE:", response.data);
       if(data.success){
         toast.success(data.message)
         setFiles([]);
@@ -51,8 +59,13 @@ const AddProduct = () => {
     } catch(error){
       toast.error(error.message)
     }
-    
-  };
+
+
+  
+}
+
+
+  
 
   return (
     <div className="flex-1 min-h-screen flex flex-col justify-between">

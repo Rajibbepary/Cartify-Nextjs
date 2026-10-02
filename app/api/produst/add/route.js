@@ -3,8 +3,7 @@
 import connectDB from "@/config/db";
 import authSeller from "@/lib/authSeller";
 import Product from "@/models/Product";
-import { auth } from "@clerk/nextjs";
-//import { getAuth } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { v2 as cloudinary } from "cloudinary";
 import { NextResponse } from "next/server";
 
@@ -17,11 +16,13 @@ cloudinary.config({
 })
 
 export async function POST(request){
+
+    
+    
     try{
 
-        // const {userId} = getAuth(request)
-         
-            const { userId } = await auth();
+        //  const {userId} = getAuth()
+        const {userId} = auth()
 
         const isSeller = await authSeller(userId)
 
