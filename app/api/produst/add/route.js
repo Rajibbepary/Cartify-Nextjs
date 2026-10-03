@@ -1,5 +1,4 @@
 
-
 import connectDB from "@/config/db";
 import authSeller from "@/lib/authSeller";
 import Product from "@/models/Product";
@@ -10,19 +9,18 @@ import { NextResponse } from "next/server";
 //configure cloudinary
 
 cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
+    cloud_name:process.env.CLOUDINARY_CLOUD_NAME,
+    api_key:process.env.CLOUDINARY_API_KEY,
+    api_secret:process.env.CLOUDINARY_API_SECRET
 })
 
 export async function POST(request){
 
     
-    
     try{
 
         //  const {userId} = getAuth()
-        const {userId} = auth()
+        const {userId} = await auth()
 
         const isSeller = await authSeller(userId)
 
@@ -43,7 +41,6 @@ export async function POST(request){
         if(!files || files.length === 0){
             return NextResponse.json({success: false, message: 'no files uploaded'})
         }
-
         const result = await Promise.all(
            files.map(async (files) =>{
             const arrayBuffer = await files.arrayBuffer()
@@ -65,6 +62,7 @@ export async function POST(request){
            }) 
         )
 
+    
       const image = result.map(result => result.secure_url) 
 
       await connectDB()
@@ -84,8 +82,7 @@ export async function POST(request){
       return NextResponse.json({success: true, message: 'Upload successful', newProduct})
 
     } catch(error){
-        console.error("ADD PRODUCT ERROR:", error);
-
+        error.message()
       return NextResponse.json({
         success: false,
         message: error.message

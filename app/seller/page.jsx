@@ -28,22 +28,15 @@ const AddProduct = () => {
     formData.append('price', price)
     formData.append('offerPrice', offerPrice)
 
-    // for(let i = 0; i < files.length; i++){
-    //   formData.append('image', files[i])
-    // }
-
-    files.forEach((file) => {
-    if (file) {
-        formData.append("image", file);
+    for(let i = 0; i < files.length; i++){
+      formData.append('image', files[i])
     }
-    });
-
 
     try{
       const token = await getToken()
   
-      const { data} = await axios.post('/api/product/add',formData,{headers:{Authorization:`Bearer ${token}`}})
-      //console.log("🔥 API RESPONSE:", response.data);
+      const { data} = await axios.post('/api/produst/add',formData,{headers:{Authorization:`Bearer ${token}`}})
+      
       if(data.success){
         toast.success(data.message)
         setFiles([]);
@@ -56,9 +49,13 @@ const AddProduct = () => {
         toast.error(data.message);
         console.log(data)
       }
-    } catch(error){
-      toast.error(error.message)
-    }
+    } catch (error) {
+  toast.error(
+    error.response?.data?.message ||
+    error.message ||
+    "Something went wrong"
+  );
+}
 
 
   
