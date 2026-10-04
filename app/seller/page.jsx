@@ -50,10 +50,10 @@ const AddProduct = () => {
         console.log(data)
       }
     } catch (error) {
-  toast.error(
-    error.response?.data?.message ||
-    error.message ||
-    "Something went wrong"
+      toast.error(
+        error.response?.data?.message ||
+        error.message ||
+        "Something went wrong"
   );
 }
 

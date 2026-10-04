@@ -14,12 +14,14 @@ cloudinary.config({
     api_secret:process.env.CLOUDINARY_API_SECRET
 })
 
+
 export async function POST(request){
 
     
     try{
 
-        //  const {userId} = getAuth()
+       const ping = await cloudinary.api.ping();
+        console.log("🔥 CLOUDINARY PING:", ping)
         const {userId} = await auth()
 
         const isSeller = await authSeller(userId)
@@ -48,12 +50,17 @@ export async function POST(request){
 
             return new Promise((resolve, reject)=>{
                 const stream = cloudinary.uploader.upload_stream(
-                  {resource_type: 'auto'} ,
+                  {resource_type: 'image'} ,
                   (error, result) => {
                     if(error){
                         reject(error)
+                        console.log("🔥 CLOUDINARY ERROR MESSAGE:", error.message);
+                        console.log("🔥 CLOUDINARY ERROR CODE:", error.http_code);
+                        console.log("🔥 CLOUDINARY FULL ERROR:", error);
+                        
                     }else{
                         resolve(result)
+                        console.log('cloudinary success', result)
                     }
                   } 
                 )
@@ -81,11 +88,11 @@ export async function POST(request){
 
       return NextResponse.json({success: true, message: 'Upload successful', newProduct})
 
-    } catch(error){
-        error.message()
-      return NextResponse.json({
-        success: false,
-        message: error.message
-    })
-    }
+    }catch(error){
+        console.log(error);
+        return NextResponse.json({
+            success: false,
+            message: error.message
+        }, { status: 500 });
+        }
 }
