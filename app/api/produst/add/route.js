@@ -1,4 +1,4 @@
-
+   
 import connectDB from "@/config/db";
 import authSeller from "@/lib/authSeller";
 import Product from "@/models/Product";
@@ -17,11 +17,8 @@ cloudinary.config({
 
 export async function POST(request){
 
-    
     try{
 
-       const ping = await cloudinary.api.ping();
-        console.log("🔥 CLOUDINARY PING:", ping)
         const {userId} = await auth()
 
         const isSeller = await authSeller(userId)
@@ -38,26 +35,22 @@ export async function POST(request){
         const price = formData.get('price');
         const offerPrice = formData.get('offerPrice');
 
-        const files = formData.getAll('image');
-
+        const files = formData.getAll('images');
         if(!files || files.length === 0){
             return NextResponse.json({success: false, message: 'no files uploaded'})
         }
         const result = await Promise.all(
-           files.map(async (files) =>{
-            const arrayBuffer = await files.arrayBuffer()
+           files.map(async (file) =>{
+            const arrayBuffer = await file.arrayBuffer()
             const buffer = Buffer.from(arrayBuffer)
 
             return new Promise((resolve, reject)=>{
                 const stream = cloudinary.uploader.upload_stream(
-                  {resource_type: 'image'} ,
+                  { resource_type: 'auto'},
                   (error, result) => {
                     if(error){
                         reject(error)
-                        console.log("🔥 CLOUDINARY ERROR MESSAGE:", error.message);
-                        console.log("🔥 CLOUDINARY ERROR CODE:", error.http_code);
-                        console.log("🔥 CLOUDINARY FULL ERROR:", error);
-                        
+            
                     }else{
                         resolve(result)
                         console.log('cloudinary success', result)
@@ -96,3 +89,7 @@ export async function POST(request){
         }, { status: 500 });
         }
 }
+
+
+
+             
