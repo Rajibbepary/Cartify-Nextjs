@@ -1,3 +1,4 @@
+import { inngest } from "@/config/inngest";
 import Product from "@/models/Product";
 import User from "@/models/User";
 import { auth } from "@clerk/nextjs/server";
@@ -7,7 +8,7 @@ import { NextResponse } from "next/server";
 export async function POST(request){
     try{
 
-        const {userId} = auth(request)
+        const {userId} = await auth(request)
         const {address, items} = await request.json();
 
         if(!address || items.length === 0){
