@@ -1,5 +1,5 @@
 'use client'
-import { productsDummyData, userDummyData } from "@/assets/assets";
+//import { productsDummyData, userDummyData } from "@/assets/assets";
 import { useAuth, useUser } from "@clerk/nextjs";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -116,16 +116,6 @@ export const AppContextProvider = (props) => {
         return totalCount;
     }
 
-    // const getCartAmount = () => {
-    //     let totalAmount = 0;
-    //     for (const items in cartItems) {
-    //         let itemInfo = products.find((product) => product._id === items);
-    //         if (cartItems[items] > 0) {
-    //             totalAmount += itemInfo.offerPrice * cartItems[items];
-    //         }
-    //     }
-    //     return Math.floor(totalAmount * 100) / 100;
-    // }
 
     
 const getCartAmount = () => {
