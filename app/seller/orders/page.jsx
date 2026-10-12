@@ -1,26 +1,44 @@
 'use client';
 import React, { useEffect, useState } from "react";
-import { assets, orderDummyData } from "@/assets/assets";
+import { assets } from "@/assets/assets";
 import Image from "next/image";
 import { useAppContext } from "@/context/AppContext";
 import Footer from "@/components/seller/Footer";
 import Loading from "@/components/Loading";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const Orders = () => {
 
-    const { currency } = useAppContext();
+    const { currency, getToken, user } = useAppContext();
 
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const fetchSellerOrders = async () => {
-        setOrders(orderDummyData);
-        setLoading(false);
+       try{
+
+        const token = await getToken()
+        
+        const {data} = await axios.get('/api/order/seller-orders', {headers:{Authorization: `Bearer ${token}`}})
+
+        if(data.success){
+            setOrders(data.orders)
+            setLoading(false)
+        }else{
+            toast.error(data.message)
+        }
+       } catch(error){
+        toast.error(error.message)
+       }
     }
 
     useEffect(() => {
-        fetchSellerOrders();
-    }, []);
+       
+        if(user){
+             fetchSellerOrders();
+        }
+    }, [user]);
 
     return (
         <div className="flex-1 h-screen overflow-scroll flex flex-col justify-between text-sm">
@@ -44,13 +62,13 @@ const Orders = () => {
                             </div>
                             <div>
                                 <p>
-                                    <span className="font-medium">{order.address.fullName}</span>
+                                    <span className="font-medium">{order.address?.fullName}</span>
                                     <br />
-                                    <span >{order.address.area}</span>
+                                    <span >{order.address?.area}</span>
                                     <br />
-                                    <span>{`${order.address.city}, ${order.address.state}`}</span>
+                                    <span>{`${order.address?.city}, ${order.address?.state}`}</span>
                                     <br />
-                                    <span>{order.address.phoneNumber}</span>
+                                    <span>{order.address?.phoneNumber}</span>
                                 </p>
                             </div>
                             <p className="font-medium my-auto">{currency}{order.amount}</p>
