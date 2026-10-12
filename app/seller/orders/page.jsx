@@ -1,6 +1,5 @@
 'use client';
 import React, { useEffect, useState } from "react";
-import { assets } from "@/assets/assets";
 import Image from "next/image";
 import { useAppContext } from "@/context/AppContext";
 import Footer from "@/components/seller/Footer";
@@ -48,11 +47,18 @@ const Orders = () => {
                     {orders.map((order, index) => (
                         <div key={index} className="flex flex-col md:flex-row gap-5 justify-between p-5 border-t border-gray-300">
                             <div className="flex-1 flex gap-5 max-w-80">
-                                <Image
-                                    className="max-w-16 max-h-16 object-cover"
-                                    src={assets.box_icon}
-                                    alt="box_icon"
-                                />
+                              {order.items.map((item, index) => (
+                                    <Image
+                                        key={item.product?._id || index}
+                                        className="w-16 h-16 object-cover rounded"
+                                        src={item.product?.image?.[0] || "/placeholder.png"}
+                                        alt={item.product?.name || "Product"}
+                                        width={64}
+                                        height={64}
+                                    />
+                                ))} 
+                                        
+                                
                                 <p className="flex flex-col gap-3">
                                     <span className="font-medium">
                                         {order.items.map((item) => item.product.name + ` x ${item.quantity}`).join(", ")}
