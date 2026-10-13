@@ -16,9 +16,12 @@ const AddProduct = () => {
   const [category, setCategory] = useState('Earphone');
   const [price, setPrice] = useState('');
   const [offerPrice, setOfferPrice] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+  setIsSubmitting(true);
 
     const formData = new FormData()
 
@@ -51,7 +54,9 @@ const AddProduct = () => {
       }
     } catch (error) {
       toast.error(error.message);
-} 
+}finally {
+    setIsSubmitting(false);
+  } 
 }
 
 
@@ -162,8 +167,15 @@ const AddProduct = () => {
             />
           </div>
         </div>
-        <button type="submit" className="px-8 py-2.5 bg-orange-600 text-white font-medium rounded">
-          ADD
+        <button type="submit"  disabled={isSubmitting} className="px-8 py-2.5 bg-orange-600 text-white font-medium rounded">
+                {isSubmitting ? (
+        <>
+          <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+          ADDING...
+        </>
+      ) : (
+        "ADD"
+      )}
         </button>
       </form>
       {/* <Footer /> */}
