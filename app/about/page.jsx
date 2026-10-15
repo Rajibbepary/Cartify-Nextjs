@@ -326,7 +326,7 @@ const About = () => {
       <section className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <motion.div
           {...reveal}
-          className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl bg-slate-600 px-6 py-14 text-center sm:px-12 sm:py-20"
+          className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl bg-slate-500 px-6 py-14 text-center sm:px-12 sm:py-20"
         >
           <div className="absolute -right-20 -top-24 h-64 w-64 rounded-full bg-orange-500/20 blur-3xl" />
           <div className="absolute -bottom-24 -left-20 h-64 w-64 rounded-full bg-orange-400/10 blur-3xl" />
