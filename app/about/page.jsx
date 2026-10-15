@@ -13,6 +13,8 @@ import {
   ShoppingBag,
   CheckCircle2,
 } from "lucide-react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 // Reusable animation settings
 const fadeUp = {
@@ -80,6 +82,7 @@ const About = () => {
 
   return (
     <main className="overflow-hidden bg-white text-slate-800">
+    <Navbar/>
       {/* Hero Section */}
       <section className="mx-auto max-w-7xl px-4 pb-16 pt-12 sm:px-6 lg:px-8 lg:pb-24 lg:pt-20">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
@@ -90,7 +93,7 @@ const About = () => {
           >
             <span className="inline-flex items-center gap-2 rounded-full bg-orange-50 px-4 py-2 text-sm font-semibold text-orange-600">
               <Sparkles size={16} />
-              GET TO KNOW CARTIFY
+              GET TO KNOW QuickCat
             </span>
 
             <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
@@ -101,14 +104,14 @@ const About = () => {
             </h1>
 
             <p className="mt-6 max-w-xl text-base leading-8 text-slate-500 sm:text-lg">
-              Welcome to Cartify, your online shopping destination.
+              Welcome to QuickCat, your online shopping destination.
               Discover useful products, explore new possibilities, and
               enjoy a shopping experience designed around convenience.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <a
-                href="/shop"
+                href="/all-products"
                 className="inline-flex items-center gap-2 rounded-xl bg-orange-500 px-6 py-3.5 font-semibold text-white shadow-lg shadow-orange-500/20 transition hover:-translate-y-1 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
               >
                 Explore Products
@@ -159,7 +162,8 @@ const About = () => {
                   </div>
                   <div>
                     <p className="font-bold text-slate-900">
-                      Discover More with Cartify
+                      Discover More with QuickCat
+                
                     </p>
                     <p className="mt-1 text-sm text-slate-500">
                       Products for your everyday needs
@@ -188,7 +192,7 @@ const About = () => {
             </h2>
 
             <p className="mt-5 leading-8 text-slate-600">
-              Cartify is built around a simple idea: finding the products
+              QuickCat is built around a simple idea: finding the products
               you need should feel easy and enjoyable. We bring products
               together in one place so you can browse, compare, and shop
               with greater convenience.
@@ -275,10 +279,10 @@ const About = () => {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div {...reveal} className="mx-auto mb-12 max-w-2xl text-center">
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-orange-500">
-              The Cartify Difference
+              The QuickCat Difference
             </p>
             <h2 className="mt-4 text-3xl font-extrabold text-slate-900 sm:text-4xl">
-              Why Choose Cartify?
+              Why Choose QuickCat?
             </h2>
             <p className="mt-4 leading-7 text-slate-500">
               A customer-focused experience from browsing to checkout.
@@ -322,7 +326,7 @@ const About = () => {
       <section className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <motion.div
           {...reveal}
-          className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl bg-slate-900 px-6 py-14 text-center sm:px-12 sm:py-20"
+          className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl bg-slate-600 px-6 py-14 text-center sm:px-12 sm:py-20"
         >
           <div className="absolute -right-20 -top-24 h-64 w-64 rounded-full bg-orange-500/20 blur-3xl" />
           <div className="absolute -bottom-24 -left-20 h-64 w-64 rounded-full bg-orange-400/10 blur-3xl" />
@@ -343,7 +347,7 @@ const About = () => {
             </p>
 
             <a
-              href="/shop"
+              href="/all-products"
               className="mt-8 inline-flex items-center gap-2 rounded-xl bg-orange-500 px-7 py-4 font-semibold text-white transition hover:-translate-y-1 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-slate-900"
             >
               Start Shopping
@@ -352,6 +356,7 @@ const About = () => {
           </div>
         </motion.div>
       </section>
+      <Footer/>
     </main>
   );
 };
