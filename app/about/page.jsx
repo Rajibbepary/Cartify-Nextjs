@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { assets } from "@/assets/assets";
 
 // Reusable animation settings
 const fadeUp = {
@@ -149,7 +150,7 @@ const About = () => {
 
             <div className="relative overflow-hidden rounded-3xl bg-slate-100 p-3 shadow-xl shadow-slate-900/5">
               <img
-                src="https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=1100&q=85"
+                src={assets.smartwatch1}
                 alt="Electronic products available for online shopping"
                 className="h-[320px] w-full rounded-2xl object-cover sm:h-[420px]"
                 fetchPriority="high"
